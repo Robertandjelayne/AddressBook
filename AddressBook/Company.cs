@@ -15,7 +15,7 @@
 
         public override string ToString()
         {
-            return $"{_name} {base.ToString()}";
+            return $"Cmpany: {_name} {base.ToString()}";
         }
 
         private string _name;
