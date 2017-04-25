@@ -8,8 +8,11 @@ namespace AddressBook
         public Rolodex()
         {
             _contacts = new List<Contact>();
-            _recipes = new List<Recipe>();
+            _recipes = new Dictionary<RecipeType, List<Recipe>>();
 
+            _recipes.Add(RecipeType.Appitizers, new List<Recipe>());
+            _recipes[RecipeType.Entrees] = new List<Recipe>();
+            _recipes[RecipeType.Desserts] = new List<Recipe>();
         }
 
         public void DoStuff()
@@ -18,14 +21,14 @@ namespace AddressBook
             ShowMenu();
             // Get the user's choice
             MenuOption choice = GetMenuOption();
-            
+
             // while the user does not want to exit
             while (choice != MenuOption.Exit)
             {
                 // figure out what they want to do
                 // get information
                 // do stuff
-                switch(choice)
+                switch (choice)
                 {
                     case MenuOption.AddPerson:
                         DoAddPerson();
@@ -62,8 +65,18 @@ namespace AddressBook
             Console.WriteLine("Please enter your recipe title:");
             string title = GetNonEmptyStringFromUser();
             Recipe recipe = new Recipe(title);
-            _recipes.Add(recipe);
 
+            Console.WriteLine("What type of recipe is this?:");
+            for (int i = 0; i < (int)RecipeType.UPPER_LIMIT; i += 1)
+            {
+                Console.WriteLine($"{i}. {(RecipeType)i}");
+            }
+            RecipeType choice = (RecipeType)int.Parse(Console.ReadLine());
+
+            List<Recipe> specificRecipes = _recipes[choice];
+            specificRecipes.Add(recipe);
+               
+            
         }
 
         private void DoRemoveContact()
@@ -100,7 +113,9 @@ namespace AddressBook
 
             List<IMatchable> matchables = new List<IMatchable>();
             matchables.AddRange(_contacts);
-            matchables.AddRange(_recipes);
+            matchables.AddRange(_recipes[RecipeType.Appitizers]);
+            matchables.AddRange(_recipes[RecipeType.Entrees]);
+            matchables.AddRange(_recipes[RecipeType.Desserts]);
 
             foreach (IMatchable matcher in matchables)
             {
@@ -137,7 +152,7 @@ namespace AddressBook
         {
             Console.Clear();
             Console.WriteLine("YOUR CONTACTS");
-            
+
             foreach (Contact contact in _contacts)
             {
                 Console.WriteLine($"> {contact}");
@@ -222,6 +237,6 @@ namespace AddressBook
         }
 
         private List<Contact> _contacts;
-        private List<Recipe> _recipes;
+        private Dictionary<RecipeType, List<Recipe>> _recipes;
     }
 }
