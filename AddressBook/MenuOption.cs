@@ -13,7 +13,11 @@ namespace AddressBook
         AddCompany,
         ListContacts,
         SearchContacts,
-        RemoveContact
+        RemoveContact,
+        AddRecipe,
+        SearchEverything,
+
+        UPPER_LIMIT
         
     }
 }
