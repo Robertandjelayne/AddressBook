@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AddressBook
+﻿namespace AddressBook
 {
-        public enum RecipeType
+    public enum RecipeType
     {
-        Appitizers,
-        Entrees,
+        Appetizers,
+        Entreés,
         Desserts,
 
         UPPER_LIMIT
-
     }
 }
-

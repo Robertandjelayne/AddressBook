@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AddressBook
+﻿namespace AddressBook
 {
     public class Recipe : IMatchable
     {
@@ -15,7 +9,7 @@ namespace AddressBook
 
         public bool Matches(string term)
         {
-            return _title.ToLower().Contains(term.ToLower()); 
+            return _title.ToLower().Contains(term.ToLower());
         }
 
         public override string ToString()
