@@ -20,7 +20,12 @@ namespace AddressBook
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();
 
-            Rolodex rolodex = new Rolodex(connectionString, contactsFileName);
+            ContactsRepository contactsRepro 
+                = new ContactsRepository(contactsFileName);
+            RecipesRepository recipesRepro
+                = new RecipesRepository(connectionString);
+            Rolodex rolodex 
+                = new Rolodex(contactsRepro, recipesRepro);
             rolodex.DoStuff();
         }
     }
