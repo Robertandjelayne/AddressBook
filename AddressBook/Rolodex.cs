@@ -5,17 +5,11 @@ namespace AddressBook
 {
     public class Rolodex
     {
-        public Rolodex(ContactsRepository contactsRepro, RecipesRepository recipesRepro)
+        public Rolodex(IHandleContacts contactsRepro, IHandleRecipes recipesRepro)
            
         {
             _contactsRepository = contactsRepro;
             _recipesRepository = recipesRepro;
-            _contacts = new List<Contact>();
-            _recipes = new Dictionary<RecipeType, List<Recipe>>();
-
-            _recipes.Add(RecipeType.Appetizers, new List<Recipe>());
-            _recipes[RecipeType.Entreés] = new List<Recipe>();
-            _recipes.Add(RecipeType.Desserts, new List<Recipe>());
         }
 
         public void DoStuff()
@@ -271,7 +265,7 @@ namespace AddressBook
         private void ShowMenu()
         {
             Console.Clear();
-            Console.WriteLine($"ROLODEX! ({_contacts.Count}) ({_recipes.Count})");
+            Console.WriteLine($"ROLODEX! ({_contactsRepository.Count}) ({_recipesRepository.Count})");
             Console.WriteLine("1. Add a person");
             Console.WriteLine("2. Add a company");
             Console.WriteLine("3. List all contacts");
@@ -287,11 +281,7 @@ namespace AddressBook
             Console.WriteLine();
             Console.Write("What would you like to do? ");
         }
-
-        private readonly List<Contact> _contacts;
-        private Dictionary<RecipeType, List<Recipe>> _recipes;
-
-        private readonly ContactsRepository _contactsRepository;
-        private readonly RecipesRepository _recipesRepository;
+        private readonly IHandleContacts _contactsRepository;
+        private readonly IHandleRecipes _recipesRepository;
     }
 }

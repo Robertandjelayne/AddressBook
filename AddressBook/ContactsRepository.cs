@@ -4,9 +4,15 @@ using System.IO;
 
 namespace AddressBook
 {
-    public class ContactsRepository
+    public class ContactsRepository : IHandleContacts
     {
         private string _contactsFileName;
+
+        public int Count
+        {
+            get
+            { return GetAllContacts().Count;}
+        }
 
         public ContactsRepository(string contactsFileName)
         {
