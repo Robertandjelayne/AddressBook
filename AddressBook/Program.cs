@@ -24,8 +24,11 @@ namespace AddressBook
                 = new ContactsRepository(contactsFileName);
             RecipesRepository recipesRepro
                 = new RecipesRepository(connectionString);
+
+            ConsoleReader consoleReader = new ConsoleReader();
             Rolodex rolodex 
-                = new Rolodex(contactsRepro, recipesRepro);
+
+                = new Rolodex(contactsRepro, recipesRepro, consoleReader);
             rolodex.DoStuff();
         }
     }
